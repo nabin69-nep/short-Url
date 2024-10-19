@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>URL Shortener</title>
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: #eaeaea;
+        color: #333;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height: 100vh;
+        text-align: center;
+      }
+
+      h1 {
+        color: #2c3e50;
+        margin-bottom: 20px;
+        font-size: 2.5em;
+      }
+
+      .container {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+        width: 100%;
+        max-width: 500px;
+      }
+
+      .instructions {
+        margin-bottom: 20px;
+        font-size: 1.1em;
+        color: #555;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+        text-align: left;
+      }
+
+      input[type="text"] {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+      }
+
+      button {
+        background-color: #3498db;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 12px;
+        cursor: pointer;
+        font-size: 16px;
+        width: 100%;
+        transition: background-color 0.3s, transform 0.2s;
+      }
+
+      button:hover {
+        background-color: #2980b9;
+        transform: translateY(-1px);
+      }
+
+      a {
+        color: #3498db;
+        text-decoration: none;
+        display: block;
+        margin-top: 15px;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      .generated-url {
+        margin-top: 20px;
+        font-size: 1.1em;
+        color: #2c3e50;
+      }
+
+      .error-message {
+        color: red;
+        margin: 15px 0;
+      }
+
+      .recent-links {
+        margin-top: 30px;
+        text-align: left;
+      }
+
+      .recent-links h2 {
+        font-size: 1.5em;
+        margin-bottom: 10px;
+      }
+
+      .link-item {
+        background-color: #f9f9f9;
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      .flex {
+        display: flex;
+        gap: 5px;
+        align-items: center;
+      }
+      .span {
+        margin-top: 15px;
+  
+      }
+
+      @media (max-width: 500px) {
+        h1 {
+          font-size: 2em;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>URL Shortener</h1>
+      <div class="instructions">
+        Enter your original URL below to generate a shortened link. This will
+        help you share long URLs more easily!
+      </div>
+
+      <% if (locals.error) { %>
+      <div class="error-message"><%= locals.error %></div>
+      <% } %> <% if (locals.id) { %>
+      <p class="generated-url">
+        URL Generated =>
+        <a href="http://localhost:8000/url/<%= id %>" target="_blank"
+          >http://localhost:8000/url/<%= id %></a
+        >
+      </p>
+      <% } %>
+
+      <form action="/url" method="post">
+        <label for="url">Enter Your Original URL</label>
+        <input
+          type="text"
+          placeholder="https://example.com"
+          name="url"
+          required
+        />
+        <button type="submit">Generate URL</button>
+      </form>
+      
+     
+    </div>
+  </body>
+</html>
